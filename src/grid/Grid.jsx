@@ -3,24 +3,6 @@ import { GridStyled, Photo, PhotoWrapper } from "./Grid.styled.js";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export const UseFetchPhotos = () => {
-  const [res, setRes] = useState();
-  useEffect(() => {
-    axios
-      .get("https://api.unsplash.com/photos", {
-        params: {
-          page: 1,
-          per_page: 10,
-        },
-        headers: {
-          Authorization:
-            "Client-ID Uc9HZgL1NJ_E0mP9qu3w_nAgbcS_SX0upeXFvPm9S7c",
-        },
-      })
-      .then((res) => setRes(res));
-  }, []);
-  return res;
-};
 export const Grid = () => {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -72,9 +54,9 @@ export const Grid = () => {
       <ResponsiveMasonry>
         <Masonry gutter="20px" columnsCount={3}>
           {photos.length &&
-            photos.map(({ urls: { regular } }, idx) => (
+            photos.map(({ urls: { small } }, idx) => (
               <PhotoWrapper key={idx}>
-                <Photo src={regular} alt="" />
+                <Photo src={small} alt="" />
               </PhotoWrapper>
             ))}
         </Masonry>
